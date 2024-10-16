@@ -1,7 +1,8 @@
-# torch
-transformers
+torch
+# transformers
+transformers[torch]
+accelerate
 datasets
 nltk
 rouge-score
-jupyterlab-git
 ipywidgets
