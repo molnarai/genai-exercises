@@ -8,4 +8,4 @@ COPY . /app/
 ENV HUGGINGFACE_TOKEN=${HUGGINGFACE_TOKEN}
 # ENTRYPOINT [ "/bin/bash" ] 
 # CMD [ "/opt/.venv/bin/python3" ]
-ENTRYPOINT [ /opt/.venv/bin/python3 ]
+# ENTRYPOINT [ /opt/.venv/bin/python3 ]
