@@ -19,17 +19,12 @@ CONTAINER_NAME="${USER}/nvidia-ml-pytorch"
 HUGGINGFACE_TOKEN=$(cat $HOME/.secretes/huggingface_token.txt)
 
 $DOCKER build -t $CONTAINER_NAME \
-    --build-arg USER="$USER" \
-    --build-arg UID=$(id -u) \
-    --build-arg GID=$(id -g) \
-    --build-arg UNAME=$(uname -m) \
     --build-arg NVIDIA_VISIBLE_DEVICES=all \
     -f Dockerfile .
 
 $DOCKER run --rm -it \
     -e HUGGINGFACE_TOKEN=$HUGGINGFACE_TOKEN \
     --name $CONTAINER_NAME \
-    --user $(id -u):$(id -g) \
     --workdir /app $*
 
 
