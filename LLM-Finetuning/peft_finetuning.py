@@ -60,7 +60,8 @@ model.save_pretrained(output_dir)
 tokenizer.save_pretrained(output_dir)
 
 # Load the fine-tuned model using the TextClassificationPipeline
-classifier = pipeline("text-classification", model=output_dir, tokenizer=output_dir)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+classifier = pipeline("text-classification", model=output_dir, tokenizer=output_dir, device=device)
 
 # Test the fine-tuned model on a sample text
 sample_text = "This movie was fantastic! I loved every bit of it."
