@@ -23,7 +23,8 @@ fi
 
 CONTAINER_NAME="${USER}-nvidia-ml-pytorch"
 
-HUGGINGFACE_TOKEN=$(cat $HOME/.secrets/huggingface_token.txt)
+# HUGGINGFACE_TOKEN=$(cat $HOME/.secrets/huggingface_token.txt)
+FREE_PORT=`ruby -e 'require "socket"; puts Addrinfo.tcp("", 0).bind {|s| s.local_address.ip_port }'`
 
 # $DOCKER build -t $CONTAINER_NAME \
 #     --build-arg NVIDIA_VISIBLE_DEVICES=all \
@@ -32,6 +33,8 @@ HUGGINGFACE_TOKEN=$(cat $HOME/.secrets/huggingface_token.txt)
 echo "Running container $CONTAINER_NAME"
 $DOCKER run --rm -it \
     $DEVICES \
+    -p ${FREE_PORT}:8888 \
+    -e HUGGINGFACE_TOKEN=`cat $HOME/.secrets/huggingface_token.txt` \
     --name $CONTAINER_NAME \
     -v $PWD:/app \
     --workdir /app \

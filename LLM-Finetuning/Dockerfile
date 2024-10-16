@@ -8,7 +8,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY ./requirements.txt /opt/requirements.txt
 RUN pip3 install -r /opt/requirements.txt
 
-ENV HUGGINGFACE_TOKEN=${HUGGINGFACE_TOKEN}
+# ENV HUGGINGFACE_TOKEN=${HUGGINGFACE_TOKEN}
 # ENTRYPOINT [ "/bin/bash" ] 
 # CMD [ "/opt/.venv/bin/python3" ]
 # ENTRYPOINT [ /opt/.venv/bin/python3 ]
