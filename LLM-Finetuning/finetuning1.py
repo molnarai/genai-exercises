@@ -151,7 +151,7 @@ def compute_metrics(pred):
     }
 
 def main():
-    model_name = "decaplusplus/llama-7b-hf"
+    model_name = "meta-llama/Llama-2-7b-hf"
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForQuestionAnswering.from_pretrained(model_name)
 
