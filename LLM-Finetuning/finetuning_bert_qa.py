@@ -37,6 +37,7 @@ def main(model_name='bert-base-uncased', dataset_name='squad_v2', device='cuda')
         args=training_args,
         train_dataset=tokenized_dataset["train"],
         eval_dataset=tokenized_dataset["validation"],
+        device=device,
     )
 
     trainer.train()
