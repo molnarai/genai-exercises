@@ -11,6 +11,8 @@ from tqdm import tqdm
 import numpy as np
 from rouge_score import rouge_scorer
 
+HUGGINGFACE_TOKEN = ''
+
 def prepare_train_dataset(tokenizer, max_length=384):
     dataset = load_dataset("natural_questions", split="train[:1000]")  # Using a subset for demonstration
     
@@ -133,6 +135,7 @@ def compute_metrics(pred):
         if len(pred_tokens) == 0 or len(label_tokens) == 0:
             f1 = 0
             recall = len(common_tokens) / len(label_tokens)
+            precision = len(common_tokens) / len(pred_tokens)
             f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
         
         f1_scores.append(f1)
@@ -187,4 +190,6 @@ def main():
     tokenizer.save_pretrained("./fine_tuned_llama2_qa")
 
 if __name__ == "__main__":
+    torch.cuda.empty_cache()
+    HUGGINGFACE_TOKEN = open('../.env', 'r', encoding='utf-8').read().split('=')[1].replace('"','').strip()
     main()
