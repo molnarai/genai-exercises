@@ -11,7 +11,8 @@ def main(model_name='bert-base-uncased', dataset_name='squad_v2'):
     tokenizer = AutoTokenizer.from_pretrained(model_name)
 
     def preprocess_function(examples):
-        return tokenizer(examples["question"], examples["context"], truncation=True, max_length=512)
+        max_length = 512  # Adjust this value based on your model and dataset
+        return tokenizer(examples["question"], examples["context"], truncation=True, max_length=max_length, padding="max_length")
 
     tokenized_dataset = dataset.map(preprocess_function, batched=True)
 
@@ -20,7 +21,7 @@ def main(model_name='bert-base-uncased', dataset_name='squad_v2'):
    
     training_args = TrainingArguments(
         output_dir="./results",
-        evaluation_strategy="epoch",
+        eval_strategy="epoch",
         learning_rate=2e-5,
         per_device_train_batch_size=16,
         per_device_eval_batch_size=16,
