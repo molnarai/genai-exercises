@@ -30,7 +30,7 @@ FREE_PORT=`ruby -e 'require "socket"; puts Addrinfo.tcp("", 0).bind {|s| s.local
 #     --build-arg NVIDIA_VISIBLE_DEVICES=all \
 #     -f Dockerfile .
 
-echo "Running container $CONTAINER_NAME"
+echo "Running container $CONTAINER_NAME on port $FREE_PORT"
 $DOCKER run --rm -it \
     $DEVICES \
     -p ${FREE_PORT}:8888 \
