@@ -14,15 +14,17 @@ else
     exit 1
 fi
 
-CONTAINER_NAME="${USER}/nvidia-ml-pytorch"
+CONTAINER_NAME="${USER}-nvidia-ml-pytorch"
 
 HUGGINGFACE_TOKEN=$(cat $HOME/.secretes/huggingface_token.txt)
 
 $DOCKER build -t $CONTAINER_NAME \
     --build-arg NVIDIA_VISIBLE_DEVICES=all \
     -f Dockerfile .
-
+    
+echo "Running container $CONTAINER_NAME"
 $DOCKER run --rm -it \
+    $DEVICES \
     -e HUGGINGFACE_TOKEN=$HUGGINGFACE_TOKEN \
     --name $CONTAINER_NAME \
     --workdir /app $*
