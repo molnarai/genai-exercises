@@ -17,7 +17,7 @@ def prepare_train_dataset(tokenizer, max_length=384):
     dataset = load_dataset("natural_questions", split="train[:1000]")  # Using a subset for demonstration
     
     def preprocess_function(examples):
-        questions = [q.strip() for q in examples["question"]]
+        questions = [q for q in examples["question"]]
         inputs = tokenizer(
             questions,
             examples["context"],
