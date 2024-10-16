@@ -30,7 +30,6 @@ def main(model_name='bert-base-uncased', dataset_name='squad_v2', device='cuda')
         per_device_eval_batch_size=16,
         num_train_epochs=3,
         weight_decay=0.01,
-        device_map="auto",  # Disable multi-GPU training
     )
 
     trainer = Trainer(
