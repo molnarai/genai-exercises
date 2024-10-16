@@ -191,5 +191,5 @@ def main():
 
 if __name__ == "__main__":
     torch.cuda.empty_cache()
-    HUGGINGFACE_TOKEN = open('../.env', 'r', encoding='utf-8').read().split('=')[1].replace('"','').strip()
+    HUGGINGFACE_TOKEN = open('.env', 'r', encoding='utf-8').read().split('=')[1].replace('"','').strip()
     main()
