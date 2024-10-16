@@ -33,6 +33,7 @@ echo "Running container $CONTAINER_NAME"
 $DOCKER run --rm -it \
     $DEVICES \
     --name $CONTAINER_NAME \
+    -v $PWD:/app \
     --workdir /app \
     $CONTAINER_NAME $*
 

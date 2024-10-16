@@ -4,7 +4,7 @@ RUN mkdir -p /opt
 COPY ./requirements.txt /opt/requirements.txt
 RUN python3 -m venv /opt/.venv &&  /opt/.venv/bin/pip3 install -r /opt/requirements.txt
 WORKDIR /app
-COPY . /app/
+# COPY . /app/
 ENV HUGGINGFACE_TOKEN=${HUGGINGFACE_TOKEN}
 # ENTRYPOINT [ "/bin/bash" ] 
 # CMD [ "/opt/.venv/bin/python3" ]
