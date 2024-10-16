@@ -1,10 +1,13 @@
+import os
+os.environ["NCCL_DEBUG"] = "INFO"
 import torch
 from transformers import AutoTokenizer, AutoModelForQuestionAnswering, TrainingArguments, Trainer
 from datasets import load_dataset
+import argparse
 
 
 
-def main(model_name='bert-base-uncased', dataset_name='squad_v2'):
+def main(model_name='bert-base-uncased', dataset_name='squad_v2', device='cuda'):
 
     # Dataset
     dataset = load_dataset(dataset_name)  # Or your custom dataset
@@ -27,6 +30,7 @@ def main(model_name='bert-base-uncased', dataset_name='squad_v2'):
         per_device_eval_batch_size=16,
         num_train_epochs=3,
         weight_decay=0.01,
+        device_map="auto",  # Disable multi-GPU training
     )
 
     trainer = Trainer(
@@ -44,4 +48,9 @@ def main(model_name='bert-base-uncased', dataset_name='squad_v2'):
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--model_name', type=str, default='bert-base-uncased')
+    parser.add_argument('--dataset_name', type=str, default='squad_v2')
+    parser.add_argument('--device', type=str, default='cuda')
+    args = parser.parse_args()
+    main(args.model_name, args.dataset_name, args.device)
