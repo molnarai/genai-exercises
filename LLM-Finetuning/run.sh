@@ -1,5 +1,12 @@
 #!/bin/bash
-
+cat<<'EOT'
+  ____                ____       _____              _     
+ |  _ \ _   _ _ __   |  _ \ _   |_   _|__  _ __ ___| |__  
+ | |_) | | | | '_ \  | |_) | | | || |/ _ \| '__/ __| '_ \ 
+ |  _ <| |_| | | | | |  __/| |_| || | (_) | | | (__| | | |
+ |_| \_\\__,_|_| |_| |_|    \__, ||_|\___/|_|  \___|_| |_|
+                            |___/                         
+EOT
 # This script is used to build the project and run the tests.
 
 # determine whether podman or docker should be used
