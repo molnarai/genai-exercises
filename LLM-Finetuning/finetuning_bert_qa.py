@@ -37,7 +37,6 @@ def main(model_name='bert-base-uncased', dataset_name='squad_v2', device='cuda')
         args=training_args,
         train_dataset=tokenized_dataset["train"],
         eval_dataset=tokenized_dataset["validation"],
-        device=device,
     )
 
     trainer.train()
@@ -51,6 +50,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_name', type=str, default='bert-base-uncased')
     parser.add_argument('--dataset_name', type=str, default='squad_v2')
-    parser.add_argument('--device', type=str, default='cuda:3')
+    parser.add_argument('--device', type=str, default='cuda')
     args = parser.parse_args()
     main(args.model_name, args.dataset_name, args.device)

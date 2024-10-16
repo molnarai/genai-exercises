@@ -12,7 +12,8 @@ EOT
 # determine whether podman or docker should be used
 if [ -x "$(command -v podman)" ]; then
     DOCKER=podman
-    DEVICES="--device nvidia.com/gpu=0 --device nvidia.com/gpu=1 --device nvidia.com/gpu=2 --device nvidia.com/gpu=3 --security-opt=label=disable"
+    # DEVICES="--device nvidia.com/gpu=0 --device nvidia.com/gpu=1 --device nvidia.com/gpu=2 --device nvidia.com/gpu=3 --security-opt=label=disable"
+    DEVICES="--device nvidia.com/gpu=3 --security-opt=label=disable"
 elif [ -x "$(command -v docker)" ]; then
     DOCKER=docker
     DEVICES="--device /dev/dri:/dev/dri"
@@ -32,6 +33,7 @@ FREE_PORT=`ruby -e 'require "socket"; puts Addrinfo.tcp("", 0).bind {|s| s.local
 
 echo "Running container $CONTAINER_NAME on port $FREE_PORT"
 $DOCKER run --rm -it \
+    --shm-size=48g \
     $DEVICES \
     -p ${FREE_PORT}:8888 \
     -e HUGGINGFACE_TOKEN=`cat $HOME/.secrets/huggingface_token.txt` \
