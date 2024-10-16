@@ -23,7 +23,7 @@ fi
 
 CONTAINER_NAME="${USER}-nvidia-ml-pytorch"
 
-HUGGINGFACE_TOKEN=$(cat $HOME/.secretes/huggingface_token.txt)
+HUGGINGFACE_TOKEN=$(cat $HOME/.secrets/huggingface_token.txt)
 
 # $DOCKER build -t $CONTAINER_NAME \
 #     --build-arg NVIDIA_VISIBLE_DEVICES=all \
