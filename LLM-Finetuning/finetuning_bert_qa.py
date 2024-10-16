@@ -8,7 +8,7 @@ import argparse
 
 
 def main(model_name='bert-base-uncased', dataset_name='squad_v2', device='cuda'):
-
+    print(f"Using model: {model_name}, dataset: {dataset_name}, device: {device}")
     # Dataset
     dataset = load_dataset(dataset_name)  # Or your custom dataset
     tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -51,6 +51,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_name', type=str, default='bert-base-uncased')
     parser.add_argument('--dataset_name', type=str, default='squad_v2')
-    parser.add_argument('--device', type=str, default='cuda')
+    parser.add_argument('--device', type=str, default='cuda:3')
     args = parser.parse_args()
     main(args.model_name, args.dataset_name, args.device)
